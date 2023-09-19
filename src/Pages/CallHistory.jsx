@@ -6,9 +6,8 @@ import { ArchiveSuccessful, ArchiveFailed, BadData, ArchiveAllFailed, ArchiveAll
 import CheckCircleOutlineSharpIcon from '@mui/icons-material/CheckCircleOutlineSharp';
 import Header from "../Components/Header.jsx"
 import Button from '@mui/material/Button';
-
-import '../css/list-items.css';
 import { UseAppContext } from '../Utils/Context';
+import '../css/list-items.css';
 
 
 const CallHistory = () => {
@@ -33,8 +32,7 @@ const CallHistory = () => {
       .then(() => {
         ArchiveAllSuccessful()
       })
-      .catch((err) => {
-        console.error(err)
+      .catch(() => {
         ArchiveAllFailed();
       })
       .finally(() => {
@@ -71,26 +69,26 @@ const CallHistory = () => {
     {isDataFetched ? (
         listItems.length > 0 ? (
           <>
-          {listItems}
+            {listItems}
 
-          {isModalOpen &&       
-            <div className="modal-overlay" onClick={() => setIsModalOpen(false)}></div>
-          }
-          {isModalOpen &&       
-            <CallDetailsModal callDetails={selectedCallDetails} toggleModal={toggleModal} archiveSuccess={ArchiveSuccessful} archiveFail={ArchiveFailed} badData={BadData} />
-          }
-        </>
+            {isModalOpen &&       
+              <div className="modal-overlay" onClick={() => setIsModalOpen(false)}></div>
+            }
+            {isModalOpen &&       
+              <CallDetailsModal callDetails={selectedCallDetails} toggleModal={toggleModal} archiveSuccess={ArchiveSuccessful} archiveFail={ArchiveFailed} badData={BadData} />
+            }
+          </>
+        ) : (
+            <div className='no-calls-div'>
+              <CheckCircleOutlineSharpIcon  className='check-icon'/>
+              <p>No call history</p>
+              </div>
+              )
       ) : (
-        <div className='no-calls-div'>
-          <CheckCircleOutlineSharpIcon  className='check-icon'/>
-          <p>No call history</p>
-          </div>
-          )
-          ) : (
-            <div></div>
-          )}
-        </div>
-      );
+        <div></div>
+      )}
+    </div>
+  );
 };
 
 export default CallHistory;

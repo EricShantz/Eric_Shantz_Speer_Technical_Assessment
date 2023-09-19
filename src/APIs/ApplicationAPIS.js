@@ -4,7 +4,6 @@ const base_url = `https://cerulean-marlin-wig.cyclic.app`;
 
 export function GetCallHistory() {
   try{
-
     return fetch(`${base_url}/activities`).then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -18,7 +17,6 @@ export function GetCallHistory() {
 
 export function ArchiveOne(callDetails) {
   let updatedCallBody = Object.assign({}, callDetails, { is_archived: true});
-
 
     return fetch(`${base_url}/activities/${callDetails.id}`,   
     {
@@ -41,7 +39,6 @@ export function RestoreOne(callDetails) {
   let updatedCallBody = Object.assign({}, callDetails, { is_archived: false });
 
   try{
-
     return fetch(`${base_url}/activities/${callDetails.id}`,   
     {
       method: 'PATCH',
@@ -69,8 +66,7 @@ export function RestoreOne(callDetails) {
         id: item.id,
         is_archived: true,
       };
-  
-  
+
         return fetch(`${base_url}/activities/${item.id}`, {
           method: 'PATCH',
           headers: {
@@ -97,8 +93,8 @@ export function RestoreOne(callDetails) {
       return results
     })
     .catch((error) => {
-      console.log("Error archiving all calls", error)
-      throw new Error("Error archiving all calls", error);
+      console.error("Error archiving all calls: ", error)
+      throw new Error("Error archiving all calls: ", error);
     });
 }
 

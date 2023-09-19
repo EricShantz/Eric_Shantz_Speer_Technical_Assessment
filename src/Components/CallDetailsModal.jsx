@@ -1,6 +1,5 @@
 import React from "react";
 import CloseIcon from '@mui/icons-material/Close';
-import '../css/call-details-modal.css';
 import { format } from 'date-fns';
 import Button from '@mui/material/Button';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -8,6 +7,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import TimerIcon from '@mui/icons-material/Timer';
 import { ArchiveOne, RestoreOne } from "../APIs/ApplicationAPIS";
+import '../css/call-details-modal.css';
 
 const CallDetailsModal = ({callDetails, toggleModal, archiveSuccess, archiveFail, badData, restoreSucess, restoreFail}) => {
 
@@ -25,7 +25,7 @@ const CallDetailsModal = ({callDetails, toggleModal, archiveSuccess, archiveFail
     const minutes = Math.floor(remainingSeconds / 60);
     const seconds = Math.round(remainingSeconds % 60);
 
-  return  `${hours > 0 ? hours + 'h ' : ''}${minutes}m ${seconds}s`;
+    return  `${hours > 0 ? hours + 'h ' : ''}${minutes}m ${seconds}s`;
   }
 
   const handleArchiveClick = () =>{
@@ -38,8 +38,6 @@ const CallDetailsModal = ({callDetails, toggleModal, archiveSuccess, archiveFail
       toggleModal()
     })
     .catch((error)=>{
-    
-
       if(error.message.includes("404")){
         badData()
       } else{
