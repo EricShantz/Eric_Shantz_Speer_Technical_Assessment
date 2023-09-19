@@ -16,6 +16,8 @@ const ArchivedCalls = () => {
     const [reloadContent, setReloadContent] = useState(false);
     const [allCallDetails, setAllCallDetails] = useState(null);
     const [selectedCallDetails, setSelectedCallDetails] = useState(null);
+    const [isFetching, setIsFetching] = useState(false);
+
 
     const handleRestoreAllClick = (listItems) =>{
         RestoreAll(allCallDetails)
@@ -26,6 +28,7 @@ const ArchivedCalls = () => {
           RestoreAllFailed()
         })
         .finally(()=>{
+          console.log("RELOAD")
           setReloadContent(true)
         })
 
@@ -44,9 +47,12 @@ const ArchivedCalls = () => {
           setListItems(items);
         })
         .catch(error => {
-          console.error('Error:', error);
+          if(error.message.includes("Failed to fetch")){
+            console.log("Trying again")
+            setIsFetching(true)
+          }
         });
-  }, [isModalOpen, reloadContent, toggleModal]);
+  }, [isModalOpen, reloadContent, toggleModal, isFetching]);
 
     return(
         <div className='list-items'>

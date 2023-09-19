@@ -40,6 +40,7 @@ const GenerateListItems = (data, toggleModal, archives) => {
 
   const listItems = [];
   for (const date in groupedCalls) {
+    if(groupedCalls.length < 1) return
     const callGroup = groupedCalls[date].filter((item) => !item.is_archived === archives);
     if (callGroup.length > 0) {
       listItems.push(

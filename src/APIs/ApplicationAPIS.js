@@ -1,14 +1,19 @@
 // const corsAnywhereUrl = "https://charming-bat-singlet.cyclic.app";
-// const base_url = `${corsAnywhereUrl}/${"https://cerulean-marlin-wig.cyclic.app"}`;
-const base_url = `${"https://cerulean-marlin-wig.cyclic.app"}`;
+// const base_url = `${corsAnywhereUrl}/https://cerulean-marlin-wig.cyclic.app`;
+const base_url = `https://cerulean-marlin-wig.cyclic.app`;
 
 export function GetCallHistory() {
-  return fetch(`${base_url}/activities`).then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  });
+  try{
+
+    return fetch(`${base_url}/activities`).then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    });
+  }catch(err){
+    console.warn("Error GetCallHistory", err)
+  }
 }
 
 export function ArchiveOne(callDetails) {
@@ -35,13 +40,15 @@ export function RestoreOne(callDetails) {
 
   let updatedCallBody = Object.assign({}, callDetails, { is_archived: false });
 
-  return fetch(`${base_url}/activities/${callDetails.id}`,   
-  {
-    method: 'PATCH',
-    headers: {
-    'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(updatedCallBody)
+  try{
+
+    return fetch(`${base_url}/activities/${callDetails.id}`,   
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedCallBody)
     })
     .then(response => {
       if (!response.ok) {
@@ -49,8 +56,11 @@ export function RestoreOne(callDetails) {
       }
       return response.text(); 
     })
+  }catch(err){
+    console.warn("Error RestoreOne", err)
+  }
 }
-
+  
 export function ArchiveAll(allCalls) {
   let itemsToUpdate = allCalls.filter((item) => !item.is_archived);
 
@@ -84,7 +94,7 @@ export function RestoreAll(allCalls) {
 
 
 //TODO:
-// * fuix archive all toasts
+// * fix archive all toasts
 // * add loaders
 // * add "No calls to display" if list is empty
 // * fix animations

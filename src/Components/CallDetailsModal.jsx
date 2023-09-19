@@ -3,6 +3,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import '../css/call-details-modal.css';
 import { format } from 'date-fns';
 import Button from '@mui/material/Button';
+import PhoneIcon from '@mui/icons-material/Phone';
+import PersonIcon from '@mui/icons-material/Person';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import TimerIcon from '@mui/icons-material/Timer';
 import { ArchiveOne, RestoreOne } from "../APIs/ApplicationAPIS";
 
 const CallDetailsModal = ({callDetails, toggleModal, archiveSuccess, archiveFail, badData, restoreSucess, restoreFail}) => {
@@ -66,20 +70,20 @@ const CallDetailsModal = ({callDetails, toggleModal, archiveSuccess, archiveFail
     <div className="modal-body">
       <h2 className="modal-title">Call Details</h2>
       <CloseIcon onClick={toggleModal} className="close-icon" />
-      <div className="modal-column">
-        <p className="modal-subtitle">Call Type: </p>
+      <div className="modal-row">
+        <PhoneIcon/>
         <p className="modal-content">{callDetails.call_type || "N/A"} </p>
       </div>
-      <div className="modal-column">
-        <p className="modal-subtitle">From: </p>
+      <div className="modal-row">
+      <PersonIcon/>
         <p className="modal-content">{callDetails.from || "Unknown"} </p>
       </div>
-      <div className="modal-column">
-        <p className="modal-subtitle">Datetime: </p>
+      <div className="modal-row">
+      <CalendarTodayIcon/>
         <p className="modal-content">{formatDateTime(callDetails.created_at)  || "N/A"} </p>
       </div>
-      <div className="modal-column">
-        <p className="modal-subtitle">Duration: </p>
+      <div className="modal-row">
+      <TimerIcon/>
         <p className="modal-content">{formatDuration(callDetails.duration)} </p>
 
       </div>
