@@ -64,13 +64,14 @@ const ArchivedCalls = () => {
     <div className='list-items'>
       <Header className={"header"} />
 
-      <div className='button-container'>
-        <Button variant="outlined" className="archive-all-button" onClick={handleRestoreAllClick}> Restore All Records</Button>
-      </div>
+     
 
       {isDataFetched ? (
         listItems.length > 0 ? (
           <>
+           <div className='button-container'>
+            <Button variant="outlined" className="archive-all-button" onClick={handleRestoreAllClick}> Restore All Records</Button>
+          </div>
             {listItems}
 
             {isModalOpen && (

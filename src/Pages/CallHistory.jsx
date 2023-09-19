@@ -65,12 +65,12 @@ const CallHistory = () => {
     <div className='list-items'>
       <Header className={"header"}/>
 
-    <div className='button-container'>
-      <Button variant="outlined" className="archive-all-button" onClick={handleArchiveAllClick}>Archive All Records</Button>
-    </div>
     {isDataFetched ? (
         listItems.length > 0 ? (
           <>
+            <div className='button-container'>
+              <Button variant="outlined" className="archive-all-button" onClick={handleArchiveAllClick}>Archive All Records</Button>
+            </div>
             {listItems}
 
             {isModalOpen &&       
