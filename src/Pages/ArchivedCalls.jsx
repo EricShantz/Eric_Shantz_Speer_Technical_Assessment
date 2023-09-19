@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback  } from 'react';
 import { GetCallHistory } from '../APIs/ApplicationAPIS';
-import GenerateListItems from '../Components/GenerateCallsList';
+import GenerateListItems from '../Utils/GenerateCallsList';
 import CallDetailsModal from "../Components/CallDetailsModal.jsx"
 import Header from "../Components/Header.jsx"
 import Button from '@mui/material/Button';
 import '../css/list-items.css';
 import { RestoreAll } from "../APIs/ApplicationAPIS";
-import { RestoreFailed, RestoreSuccessful, RestoreAllFailed, RestoreAllSuccessful } from '../Components/ToastMessages';
+import { RestoreFailed, RestoreSuccessful, RestoreAllFailed, RestoreAllSuccessful } from '../Utils/ToastMessages';
 
 
 

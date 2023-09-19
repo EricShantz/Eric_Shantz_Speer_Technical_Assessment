@@ -1,4 +1,4 @@
-const corsAnywhereUrl = "https://charming-bat-singlet.cyclic.app";
+// const corsAnywhereUrl = "https://charming-bat-singlet.cyclic.app";
 // const base_url = `${corsAnywhereUrl}/${"https://cerulean-marlin-wig.cyclic.app"}`;
 const base_url = `${"https://cerulean-marlin-wig.cyclic.app"}`;
 
@@ -61,9 +61,8 @@ export function ArchiveAll(allCalls) {
       console.log('All items archived successfully', results);
     })
     .catch((error) => {
-      console.log("HERE")
-      // console.error('Error archiving items', error);
-      // throw error; 
+      console.error("Error archiving all calls")
+     
     })
 }
 

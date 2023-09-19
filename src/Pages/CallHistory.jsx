@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { GetCallHistory, ArchiveAll } from '../APIs/ApplicationAPIS';
-import GenerateListItems from '../Components/GenerateCallsList';
+import GenerateListItems from '../Utils/GenerateCallsList';
 import CallDetailsModal from "../Components/CallDetailsModal.jsx"
-import { ArchiveSuccessful, ArchiveFailed, BadData, ArchiveAllFailed, ArchiveAllSuccessful } from '../Components/ToastMessages';
+import { ArchiveSuccessful, ArchiveFailed, BadData, ArchiveAllFailed, ArchiveAllSuccessful } from '../Utils/ToastMessages';
 import Header from "../Components/Header.jsx"
 import Button from '@mui/material/Button';
 
