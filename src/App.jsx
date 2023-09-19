@@ -19,7 +19,6 @@ const App = () => {
     <div className='container'>
       <div className="container-view">
 
-      
         {currentPage === "CallHistory" && 
           <CallHistory />
         }

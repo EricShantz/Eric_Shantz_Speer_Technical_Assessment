@@ -24,14 +24,21 @@ const Keypad = () => {
 
   return (
     <div>
+      <div className='outgoing-call-title'>
+        <p>
+          Outgoing Call
+        </p>
+      </div>
       <div className='display-numbers'>
-        {inputNumbers.join(' ')}
+        ({inputNumbers[0] || ' _'}{inputNumbers[1] || '_'}{inputNumbers[2] || '_ '}) - {inputNumbers[3] || '_'}{inputNumbers[4] || '_'}{inputNumbers[5] || '_'} - {inputNumbers[6] || '_'}{inputNumbers[7] || '_'}{inputNumbers[8] || '_'}{inputNumbers[9] || '_'}
       </div>
       <div className="keypad-component">
         <KeypadComponent onKeypadClick={handleKeypadClick} executeCall={executeCall} onBackspaceClick={handleBackspaceClick} />
       </div>
     </div>
   );
+  
+  
 };
 
 export default Keypad;
