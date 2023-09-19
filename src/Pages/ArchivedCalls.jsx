@@ -39,7 +39,7 @@ const ArchivedCalls = () => {
           .catch(error => {
             console.error('Error:', error);
           });
-      }, [isModalOpen, reloadContent]);
+      }, [isModalOpen, reloadContent, toggleModal]);
 
     return(
         <div className='list-items'>
