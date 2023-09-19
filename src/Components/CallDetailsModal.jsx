@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import Button from '@mui/material/Button';
 import { ArchiveOne, RestoreOne } from "../APIs/ApplicationAPIS";
 
-const CallDetailsModal = ({callDetails, toggleModal}) => {
+const CallDetailsModal = ({callDetails, toggleModal, archiveSuccess, archiveFail, badData, restoreSucess, restoreFail}) => {
 
   if (!callDetails) {
     return null;
@@ -26,27 +26,39 @@ const CallDetailsModal = ({callDetails, toggleModal}) => {
 
   const handleArchiveClick = () =>{
     ArchiveOne(callDetails)
-    .then(()=>{
-      //check if success
-      //show toast
+    .then((response)=>{
+      if(response === "Call had been updated."){
+        archiveSuccess()
+      }
     }).then(()=>{
       toggleModal()
     })
     .catch((error)=>{
-      console.error('Error:', error);
+    
+
+      if(error.message.includes("404")){
+        badData()
+      } else{
+        archiveFail()
+      }
     })
   }
 
   const handleRestoreClick = () =>{
     RestoreOne(callDetails)
-    .then(()=>{
-      //check if success
-      //show toast
+    .then((response)=>{
+      if(response === "Call had been updated."){
+        restoreSucess()
+      }
     }).then(()=>{
       toggleModal()
     })
     .catch((error)=>{
-      console.error('Error:', error);
+      if(error.message.includes("404")){
+        badData()
+      } else{
+        restoreFail()
+      }
     })
   }
 

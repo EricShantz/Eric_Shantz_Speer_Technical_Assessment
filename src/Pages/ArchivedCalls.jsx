@@ -6,6 +6,7 @@ import Header from "../Components/Header.jsx"
 import Button from '@mui/material/Button';
 import '../css/list-items.css';
 import { RestoreAll } from "../APIs/ApplicationAPIS";
+import { RestoreFailed, RestoreSuccessful, RestoreAllFailed, RestoreAllSuccessful } from '../Components/ToastMessages';
 
 
 
@@ -18,6 +19,12 @@ const ArchivedCalls = () => {
 
     const handleRestoreAllClick = (listItems) =>{
         RestoreAll(allCallDetails)
+        .then(()=>{
+          RestoreAllSuccessful()
+        }).catch((err)=>{
+          console.error(err)
+          RestoreAllFailed()
+        })
         .finally(()=>{
           setReloadContent(true)
         })
@@ -55,7 +62,7 @@ const ArchivedCalls = () => {
                 <div className="modal-overlay modal-open" onClick={() => setIsModalOpen(false)}></div>
             }
             {isModalOpen &&       
-                <CallDetailsModal callDetails={selectedCallDetails} toggleModal={toggleModal} />
+                <CallDetailsModal callDetails={selectedCallDetails} toggleModal={toggleModal} restoreSucess={RestoreSuccessful} restoreFail={RestoreFailed} />
             }
 
         </div>

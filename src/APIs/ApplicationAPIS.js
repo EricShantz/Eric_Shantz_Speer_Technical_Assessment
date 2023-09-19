@@ -1,4 +1,6 @@
-const base_url = "https://cerulean-marlin-wig.cyclic.app";
+const corsAnywhereUrl = "https://charming-bat-singlet.cyclic.app";
+// const base_url = `${corsAnywhereUrl}/${"https://cerulean-marlin-wig.cyclic.app"}`;
+const base_url = `${"https://cerulean-marlin-wig.cyclic.app"}`;
 
 export function GetCallHistory() {
   return fetch(`${base_url}/activities`).then(response => {
@@ -12,22 +14,23 @@ export function GetCallHistory() {
 export function ArchiveOne(callDetails) {
   let updatedCallBody = Object.assign({}, callDetails, { is_archived: true});
 
-  return fetch(`${base_url}/activities/${callDetails.id}`,   
-  {
-    method: 'PATCH',
-    headers: {
-    'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(updatedCallBody)
+
+    return fetch(`${base_url}/activities/${callDetails.id}`,   
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedCallBody)
     })
     .then(response => {
       if (!response.ok) {
-        throw new Error('Unable to archive record');
+        throw new Error(response.status)
       }
       return response.text(); 
     })
-}
-
+  }
+  
 export function RestoreOne(callDetails) {
 
   let updatedCallBody = Object.assign({}, callDetails, { is_archived: false });
@@ -58,8 +61,9 @@ export function ArchiveAll(allCalls) {
       console.log('All items archived successfully', results);
     })
     .catch((error) => {
-      console.error('Error archiving items', error);
-      throw error; 
+      console.log("HERE")
+      // console.error('Error archiving items', error);
+      // throw error; 
     })
 }
 
@@ -81,8 +85,7 @@ export function RestoreAll(allCalls) {
 
 
 //TODO:
-// * add toast
-// * fix broken calls
-// * fix animations
+// * fuix archive all toasts
 // * add loaders
 // * add "No calls to display" if list is empty
+// * fix animations

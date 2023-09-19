@@ -2,8 +2,10 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { GetCallHistory, ArchiveAll } from '../APIs/ApplicationAPIS';
 import GenerateListItems from '../Components/GenerateCallsList';
 import CallDetailsModal from "../Components/CallDetailsModal.jsx"
+import { ArchiveSuccessful, ArchiveFailed, BadData, ArchiveAllFailed, ArchiveAllSuccessful } from '../Components/ToastMessages';
 import Header from "../Components/Header.jsx"
 import Button from '@mui/material/Button';
+
 import '../css/list-items.css';
 
 
@@ -21,10 +23,16 @@ const CallHistory = () => {
 
   const handleArchiveAllClick = () =>{
      ArchiveAll(allCallDetails)
+     .then(()=>{
+      ArchiveAllSuccessful()
+    }).catch((err)=>{
+      console.error(err)
+      ArchiveAllFailed()
+    })
      .finally(()=>{
        setReloadContent(true)
      })
-  }
+  } 
 
   useEffect(() => {
     GetCallHistory()
@@ -55,9 +63,8 @@ const CallHistory = () => {
         <div className="modal-overlay" onClick={() => setIsModalOpen(false)}></div>
       }
       {isModalOpen &&       
-        <CallDetailsModal callDetails={selectedCallDetails} toggleModal={toggleModal} />
+        <CallDetailsModal callDetails={selectedCallDetails} toggleModal={toggleModal} archiveSuccess={ArchiveSuccessful} archiveFail={ArchiveFailed} badData={BadData} />
       }
-
   </div>
   );
 };
