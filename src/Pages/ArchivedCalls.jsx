@@ -24,22 +24,22 @@ const ArchivedCalls = () => {
 
     }
 
-  const toggleModal = (callDetails) => {
-    setSelectedCallDetails(callDetails);
-    setIsModalOpen(!isModalOpen);
-  }
-
+    const toggleModal = useCallback((callDetails) => {
+      setSelectedCallDetails(callDetails);
+      setIsModalOpen(!isModalOpen);
+    }, [isModalOpen]);
+    
     useEffect(() => {
-        GetCallHistory()
-          .then((data) => {
-            const items = GenerateListItems(data, toggleModal, false);
-            setAllCallDetails(data)
-            setListItems(items);
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-      }, [isModalOpen, reloadContent, toggleModal]);
+      GetCallHistory()
+        .then((data) => {
+          const items = GenerateListItems(data, toggleModal, false);
+          setAllCallDetails(data)
+          setListItems(items);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+  }, [isModalOpen, reloadContent, toggleModal]);
 
     return(
         <div className='list-items'>

@@ -36,7 +36,8 @@ const CallHistory = () => {
       .catch(error => {
         console.error('Error:', error);
       });
-  }, [isModalOpen, reloadContent]);
+    }, [isModalOpen, reloadContent, toggleModal]);
+
 
   return (
     
