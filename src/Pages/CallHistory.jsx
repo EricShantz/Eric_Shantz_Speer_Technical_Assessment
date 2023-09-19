@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { GetCallHistory, ArchiveAll } from '../APIs/ApplicationAPIS';
 import GenerateListItems from '../Components/GenerateCallsList';
 import CallDetailsModal from "../Components/CallDetailsModal.jsx"
@@ -14,10 +14,10 @@ const CallHistory = () => {
   const [allCallDetails, setAllCallDetails] = useState(null);
   const [selectedCallDetails, setSelectedCallDetails] = useState(null);
 
-  const toggleModal = (callDetails) => {
+  const toggleModal = useCallback((callDetails) => {
     setSelectedCallDetails(callDetails);
     setIsModalOpen(!isModalOpen);
-  }
+  }, [isModalOpen]);
 
   const handleArchiveAllClick = () =>{
      ArchiveAll(allCallDetails)
