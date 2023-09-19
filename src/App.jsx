@@ -13,7 +13,7 @@ import "./css/app.css"
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('CallHistory');
-  const {isLoading, setIsLoading} = UseAppContext()
+  const {isLoading} = UseAppContext()
 
   return (
     <div className='container'>
