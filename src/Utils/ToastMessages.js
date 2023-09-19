@@ -13,7 +13,7 @@ export const ArchiveSuccessful = () => {
     });
 }
 export const ArchiveFailed = () => {
-    return toast.error('Call archive failure', {
+    return toast.error('Failed to archive call. Please try again.', {
     position: "top-right",
     autoClose: 1500,
     hideProgressBar: false,
@@ -37,7 +37,7 @@ export const ArchiveAllSuccessful = () => {
     });
 }
 export const ArchiveAllFailed = () => {
-    return toast.error('Failed to archive all calls', {
+    return toast.error('Failed to archive all calls. Please try again', {
     position: "top-right",
     autoClose: 1500,
     hideProgressBar: false,

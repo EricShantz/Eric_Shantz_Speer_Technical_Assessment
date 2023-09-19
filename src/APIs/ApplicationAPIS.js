@@ -116,7 +116,3 @@ export function RestoreAll(allCalls) {
     });
 }
 
-
-//TODO:
-// * add "No calls to display" if list is empty
-// * fix animations

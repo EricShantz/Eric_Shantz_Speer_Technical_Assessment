@@ -41,6 +41,24 @@ margin-left: auto;
     margin: 1rem auto !important;
 }
 
+.no-calls-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.check-icon{
+ transform: scale(3);
+ color: #86BF86;
+ margin-top: 9rem;
+ margin-bottom: 1rem;
+}
+
+.no-calls-div>p{
+    font-size: 1.1rem;
+}
+
 
 /* Hide Scrollbar */
 ::-webkit-scrollbar {

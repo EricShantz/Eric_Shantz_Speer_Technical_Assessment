@@ -6,6 +6,7 @@ import Header from "../Components/Header.jsx"
 import Button from '@mui/material/Button';
 import '../css/list-items.css';
 import { RestoreAll } from "../APIs/ApplicationAPIS";
+import CheckCircleOutlineSharpIcon from '@mui/icons-material/CheckCircleOutlineSharp';
 import { RestoreFailed, RestoreSuccessful, RestoreAllFailed, RestoreAllSuccessful } from '../Utils/ToastMessages';
 import { UseAppContext } from '../Utils/Context';
 
@@ -18,6 +19,7 @@ const ArchivedCalls = () => {
     const [allCallDetails, setAllCallDetails] = useState(null);
     const [selectedCallDetails, setSelectedCallDetails] = useState(null);
     const [isFetching, setIsFetching] = useState(false);
+    const [isDataFetched, setIsDataFetched] = useState(false);
 
 
     const handleRestoreAllClick = (listItems) =>{
@@ -47,6 +49,7 @@ const ArchivedCalls = () => {
           const items = GenerateListItems(data, toggleModal, false);
           setAllCallDetails(data)
           setListItems(items);
+          setIsDataFetched(true)
         })
         .catch(error => {
           if(error.message.includes("Failed to fetch")){
@@ -56,25 +59,43 @@ const ArchivedCalls = () => {
         });
   }, [isModalOpen, reloadContent, toggleModal, isFetching]);
 
-    return(
-        <div className='list-items'>
-            <Header className={"header"}/>
+  return (
+    <div className='list-items'>
+      <Header className={"header"} />
 
-            <div className='button-container'>
-              <Button variant="outlined" className="archive-all-button" onClick={handleRestoreAllClick}> Restore All Records</Button>
-            </div>
+      <div className='button-container'>
+        <Button variant="outlined" className="archive-all-button" onClick={handleRestoreAllClick}> Restore All Records</Button>
+      </div>
 
+      {isDataFetched ? (
+        listItems.length > 0 ? (
+          <>
             {listItems}
 
-            {isModalOpen &&       
-                <div className="modal-overlay modal-open" onClick={() => setIsModalOpen(false)}></div>
-            }
-            {isModalOpen &&       
-                <CallDetailsModal callDetails={selectedCallDetails} toggleModal={toggleModal} restoreSucess={RestoreSuccessful} restoreFail={RestoreFailed} />
-            }
+            {isModalOpen && (
+              <div className="modal-overlay modal-open" onClick={() => setIsModalOpen(false)}></div>
+            )}
 
-        </div>
-    )
+            {isModalOpen && (
+              <CallDetailsModal
+                callDetails={selectedCallDetails}
+                toggleModal={toggleModal}
+                restoreSucess={RestoreSuccessful}
+                restoreFail={RestoreFailed}
+              />
+            )}
+          </>
+        ) : (
+          <div className='no-calls-div'>
+            <CheckCircleOutlineSharpIcon className='check-icon' />
+            <p>No archived calls</p>
+          </div>
+        )
+      ) : (
+        <div></div>
+      )}
+    </div>
+  );
 }
 
 export default ArchivedCalls;
