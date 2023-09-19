@@ -32,9 +32,10 @@ const ArchivedCalls = () => {
           RestoreAllFailed()
         })
         .finally(()=>{
-          toggleLoader()
-          setReloadContent(!reloadContent)
-        })
+          setTimeout(()=>{
+            toggleLoader()
+            setReloadContent(!reloadContent);
+          }, 500)        })
 
     }
 

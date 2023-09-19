@@ -97,7 +97,7 @@ export const RestoreAllSuccessful = () => {
     });
 }
 export const RestoreAllFailed = () => {
-    return toast.error('Failed to restore all calls', {
+    return toast.error('Failed to restore all calls. Please try again', {
     position: "top-right",
     autoClose: 1500,
     hideProgressBar: false,

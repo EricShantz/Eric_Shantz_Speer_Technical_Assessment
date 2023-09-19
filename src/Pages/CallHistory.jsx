@@ -36,8 +36,10 @@ const CallHistory = () => {
         ArchiveAllFailed();
       })
       .finally(() => {
-        toggleLoader()
-        setReloadContent(!reloadContent);
+        setTimeout(()=>{
+          toggleLoader()
+          setReloadContent(!reloadContent);
+        }, 500)
       });
   }
 
