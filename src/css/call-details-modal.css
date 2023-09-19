@@ -1,0 +1,66 @@
+.modal-body{
+    margin: auto;
+    width: 90%;
+    height: 50%;
+    background-color: rgb(255, 255, 255);
+    z-index: 101;
+    position: absolute;
+    top: 10rem;
+    margin: auto;
+    border-radius: 20px;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.modal-title{
+    text-align: center;
+    margin-top: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.close-icon{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.archive-button{
+    height: 2rem;
+}
+
+.modal-subtitle{
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0;
+    margin: 0 1rem;
+}
+
+.modal-column{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+}
+
+.modal-content{
+    font-size: 1rem;
+    padding: 0;
+    margin: 0.3rem 0rem 1rem 2rem;
+}
+
+.button-div{
+display: flex;
+  justify-content: center;
+}

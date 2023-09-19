@@ -1,0 +1,18 @@
+.keypad-component{
+    position: absolute;
+    bottom: 4rem;
+    left: 0;
+}
+
+.bottom-buttons{
+display: flex;
+flex-direction: row;
+margin-left: 9rem;
+margin-top: 2rem;
+}
+
+.display-numbers{
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 10rem;
+}

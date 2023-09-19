@@ -1,0 +1,48 @@
+.list-items{
+max-height:95% ;
+overflow-y: scroll;
+margin-bottom: 5rem;
+}
+
+.call-item {
+    margin: 1.2rem auto;
+    display: flex;
+    flex-direction: row;
+    border: solid rgb(92, 92, 92) 1px;
+    border-radius: 10px;
+    padding: 0rem 1rem;
+    width: 87%;
+}
+
+.call-item:hover{
+    background-color: rgba(128, 128, 128, 0.306);
+}
+
+.icon-base{
+    margin: auto 0;
+}
+
+.call-from{
+    margin-left: 1rem;
+}
+
+.date-time{
+margin-left: auto;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Adjust the margin as needed */
+  }
+
+.archive-all-button{
+    height: 1.8rem;
+    margin: 1rem auto !important;
+}
+
+
+/* Hide Scrollbar */
+::-webkit-scrollbar {
+    width: 0.1rem; 
+  }
