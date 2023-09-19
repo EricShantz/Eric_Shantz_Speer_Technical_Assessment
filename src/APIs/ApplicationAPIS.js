@@ -61,26 +61,50 @@ export function RestoreOne(callDetails) {
   }
 }
   
-export function ArchiveAll(allCalls) {
-  let itemsToUpdate = allCalls.filter((item) => !item.is_archived);
-
-  const archivePromises = itemsToUpdate.map((item) => ArchiveOne(item));
-
+  export function ArchiveAll(allCalls) {
+    const itemsToUpdate = allCalls.filter((item) => !item.is_archived);
+    
+    const archivePromises = itemsToUpdate.map((item) => {
+      const updatedCallBody = {
+        id: item.id,
+        is_archived: true,
+      };
+  
+  
+        return fetch(`${base_url}/activities/${item.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(updatedCallBody)
+        })
+        .then((response) => {
+          if (!response.ok) {
+            return response.text().then((errorResponse) => {
+              throw new Error(`Error archiving call with ID ${item.id}: ${errorResponse}`);
+            });
+          }
+          return response.text();
+        })
+        .catch((err) => {
+          throw new Error(`Error archiving call`, err);
+        });      
+    });
+  
   return Promise.all(archivePromises)
     .then((results) => {
       console.log('All items archived successfully', results);
+      return results
     })
     .catch((error) => {
-      console.error("Error archiving all calls")
-     
-    })
+      console.log("Error archiving all calls", error)
+      throw new Error("Error archiving all calls", error);
+    });
 }
 
 export function RestoreAll(allCalls) {
   let itemsToUpdate = allCalls.filter((item) => item.is_archived);
-
   const archivePromises = itemsToUpdate.map((item) => RestoreOne(item));
-
   return Promise.all(archivePromises)
     .then((results) => {
       
@@ -94,7 +118,5 @@ export function RestoreAll(allCalls) {
 
 
 //TODO:
-// * fix archive all toasts
-// * add loaders
 // * add "No calls to display" if list is empty
 // * fix animations

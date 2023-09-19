@@ -7,32 +7,38 @@ import Header from "../Components/Header.jsx"
 import Button from '@mui/material/Button';
 
 import '../css/list-items.css';
+import { UseAppContext } from '../Utils/Context';
 
 
 const CallHistory = () => {
+  const {toggleLoader} = UseAppContext()
   const [listItems, setListItems] = useState([]); 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [reloadContent, setReloadContent] = useState(false);
   const [allCallDetails, setAllCallDetails] = useState(null);
   const [selectedCallDetails, setSelectedCallDetails] = useState(null);
+  const [isFetching, setIsFetching] = useState(false);
 
   const toggleModal = useCallback((callDetails) => {
     setSelectedCallDetails(callDetails);
     setIsModalOpen(!isModalOpen);
   }, [isModalOpen]);
 
-  const handleArchiveAllClick = () =>{
-     ArchiveAll(allCallDetails)
-     .then(()=>{
-      ArchiveAllSuccessful()
-    }).catch((err)=>{
-      console.error(err)
-      ArchiveAllFailed()
-    })
-     .finally(()=>{
-       setReloadContent(true)
-     })
-  } 
+  const handleArchiveAllClick = () => {
+    toggleLoader()
+    ArchiveAll(allCallDetails)
+      .then(() => {
+        ArchiveAllSuccessful()
+      })
+      .catch((err) => {
+        console.error(err)
+        ArchiveAllFailed();
+      })
+      .finally(() => {
+        toggleLoader()
+        setReloadContent(!reloadContent);
+      });
+  }
 
   useEffect(() => {
     GetCallHistory()
@@ -42,9 +48,12 @@ const CallHistory = () => {
         setListItems(items);
       })
       .catch(error => {
-        console.error('Error:', error);
+        if(error.message.includes("Failed to fetch")){
+          console.log("Trying again")
+          setIsFetching(!isFetching)
+        }
       });
-    }, [isModalOpen, reloadContent, toggleModal]);
+}, [isModalOpen, reloadContent, toggleModal, isFetching]);
 
 
   return (
@@ -56,7 +65,6 @@ const CallHistory = () => {
       <Button variant="outlined" className="archive-all-button" onClick={handleArchiveAllClick}>Archive All Records</Button>
     </div>
 
-
       {listItems}
 
       {isModalOpen &&       
@@ -65,6 +73,7 @@ const CallHistory = () => {
       {isModalOpen &&       
         <CallDetailsModal callDetails={selectedCallDetails} toggleModal={toggleModal} archiveSuccess={ArchiveSuccessful} archiveFail={ArchiveFailed} badData={BadData} />
       }
+
   </div>
   );
 };

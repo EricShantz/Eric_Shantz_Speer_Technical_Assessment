@@ -7,10 +7,11 @@ import Button from '@mui/material/Button';
 import '../css/list-items.css';
 import { RestoreAll } from "../APIs/ApplicationAPIS";
 import { RestoreFailed, RestoreSuccessful, RestoreAllFailed, RestoreAllSuccessful } from '../Utils/ToastMessages';
-
+import { UseAppContext } from '../Utils/Context';
 
 
 const ArchivedCalls = () => {
+    const {toggleLoader} = UseAppContext()
     const [listItems, setListItems] = useState([]); 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [reloadContent, setReloadContent] = useState(false);
@@ -20,6 +21,7 @@ const ArchivedCalls = () => {
 
 
     const handleRestoreAllClick = (listItems) =>{
+      toggleLoader()
         RestoreAll(allCallDetails)
         .then(()=>{
           RestoreAllSuccessful()
@@ -28,8 +30,8 @@ const ArchivedCalls = () => {
           RestoreAllFailed()
         })
         .finally(()=>{
-          console.log("RELOAD")
-          setReloadContent(true)
+          toggleLoader()
+          setReloadContent(!reloadContent)
         })
 
     }
@@ -49,7 +51,7 @@ const ArchivedCalls = () => {
         .catch(error => {
           if(error.message.includes("Failed to fetch")){
             console.log("Trying again")
-            setIsFetching(true)
+            setIsFetching(!isFetching)
           }
         });
   }, [isModalOpen, reloadContent, toggleModal, isFetching]);

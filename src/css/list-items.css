@@ -33,7 +33,7 @@ margin-left: auto;
 .button-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* Adjust the margin as needed */
+    margin-top: 20px;
   }
 
 .archive-all-button{
