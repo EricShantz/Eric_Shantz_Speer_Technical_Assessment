@@ -4,5 +4,5 @@ import './css/header.css';
 
 import App from './App.jsx';
 
-// Use 'App' as a comment to satisfy the linter
+//log out App to satisfy Netlify linter
 console.log(App);
